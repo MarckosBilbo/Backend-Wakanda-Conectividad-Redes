@@ -1,0 +1,25 @@
+@startuml
+actor "Administrador" as Admin
+actor "Usuario" as Usuario
+actor "Proveedor" as Proveedor
+
+usecase "Registrar usuario" as Caso1
+usecase "Autenticar usuario" as Caso2
+usecase "Visualizar redes Wi-Fi disponibles" as Caso3
+usecase "Conectar a red Wi-Fi" as Caso4
+usecase "Ver historial de conexiones" as Caso5
+usecase "Gestionar configuración de red" as Caso6
+usecase "Actualizar proveedor de red Wi-Fi" as Caso7
+usecase "Consultar estadísticas de uso" as Caso8
+
+Usuario --> Caso1
+Usuario --> Caso2
+Usuario --> Caso3
+Usuario --> Caso4
+Usuario --> Caso5
+Admin --> Caso6
+Admin --> Caso7
+Admin --> Caso8
+Proveedor --> Caso7
+
+@enduml

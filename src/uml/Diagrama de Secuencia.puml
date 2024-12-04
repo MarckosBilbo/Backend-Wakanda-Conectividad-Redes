@@ -1,0 +1,22 @@
+@startuml
+actor Usuario
+participant "UsuarioController" as Controller
+participant "UsuarioService" as Service
+participant "HistorialConexionesRepository" as HistorialRepo
+participant "RedWifiService" as WifiService
+participant "ConfiguracionRed" as Configuracion
+
+Usuario -> Controller: Solicitar conexión a una red Wi-Fi
+Controller -> WifiService: Obtener configuración de la red Wi-Fi
+WifiService -> Configuracion: Validar acceso (contraseña y tipo de seguridad)
+Configuracion --> WifiService: Resultado de validación (éxito o fallo)
+alt Acceso permitido
+    WifiService -> HistorialRepo: Registrar conexión en el historial
+    HistorialRepo --> WifiService: Confirmación de registro
+    WifiService --> Controller: Conexión exitosa
+    Controller --> Usuario: Notificar conexión exitosa
+else Acceso denegado
+    WifiService --> Controller: Acceso denegado
+    Controller --> Usuario: Notificar error de conexión
+end
+@enduml
