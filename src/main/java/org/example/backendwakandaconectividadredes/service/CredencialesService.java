@@ -1,7 +1,6 @@
 package org.example.backendwakandaconectividadredes.service;
 
 import org.example.backendwakandaconectividadredes.domain.usuario.Credenciales;
-import org.example.backendwakandaconectividadredes.model.usuario.CredencialesDTO;
 import org.example.backendwakandaconectividadredes.repos.CredencialesRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,33 +15,18 @@ public class CredencialesService {
         this.credencialesRepository = credencialesRepository;
     }
 
-    // Guardar Credenciales
-    public CredencialesDTO guardar(CredencialesDTO credencialesDTO) {
-        Credenciales credenciales = convertirADominio(credencialesDTO);
-        Credenciales credencialesGuardadas = credencialesRepository.save(credenciales);
-        return convertirADTO(credencialesGuardadas);
+    // Guardar credenciales
+    public Credenciales guardar(Credenciales credenciales) {
+        return credencialesRepository.save(credenciales);
     }
 
-    // Obtener Credenciales por Correo
-    public Optional<CredencialesDTO> obtenerPorCorreo(String correo) {
-        return credencialesRepository.findByCorreo(correo)
-                .map(this::convertirADTO); // Mapear Credenciales a CredencialesDTO
+    // Obtener credenciales por correo
+    public Optional<Credenciales> obtenerPorCorreo(String correo) {
+        return credencialesRepository.findByCorreo(correo);
     }
 
-    // Métodos de Conversión entre Entidad y DTO
-    private Credenciales convertirADominio(CredencialesDTO credencialesDTO) {
-        return new Credenciales(
-                credencialesDTO.getId(),
-                credencialesDTO.getCorreo(),
-                credencialesDTO.getPassword()
-        );
-    }
-
-    private CredencialesDTO convertirADTO(Credenciales credenciales) {
-        return new CredencialesDTO(
-                credenciales.getId(),
-                credenciales.getCorreo(),
-                credenciales.getPassword()
-        );
+    // Eliminar credenciales por ID
+    public void eliminarPorId(Long id) {
+        credencialesRepository.deleteById(id);
     }
 }

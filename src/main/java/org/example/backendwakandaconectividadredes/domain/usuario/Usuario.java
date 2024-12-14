@@ -1,17 +1,32 @@
 package org.example.backendwakandaconectividadredes.domain.usuario;
 
+import jakarta.persistence.*;
 import java.util.List;
 
+@Entity
 public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
     private String apellido;
     private String email;
     private String telefono;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "credenciales_id")
     private Credenciales credenciales;
+
+    @ElementCollection
     private List<String> roles;
 
-    // Constructor
+    // Constructor vacío requerido por JPA
+    public Usuario() {
+    }
+
+    // Constructor completo
     public Usuario(Long id, String nombre, String apellido, String email, String telefono, Credenciales credenciales, List<String> roles) {
         this.id = id;
         this.nombre = nombre;
@@ -22,7 +37,7 @@ public class Usuario {
         this.roles = roles;
     }
 
-    // Getters y setters
+    // Getters y Setters
     public Long getId() {
         return id;
     }

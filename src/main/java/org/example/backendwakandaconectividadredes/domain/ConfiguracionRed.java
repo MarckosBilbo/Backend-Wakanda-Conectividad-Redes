@@ -1,20 +1,30 @@
 package org.example.backendwakandaconectividadredes.domain;
 
+import jakarta.persistence.*;
+
+@Entity
 public class ConfiguracionRed {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private boolean accesoPublico;
     private String tipoSeguridad;
-    private String contraseña;
+    private String contrasena;
 
-    // Constructor
-    public ConfiguracionRed(Long id, boolean accesoPublico, String tipoSeguridad, String contraseña) {
+    // Constructor vacío requerido por JPA
+    public ConfiguracionRed() {}
+
+    // Constructor completo
+    public ConfiguracionRed(Long id, boolean accesoPublico, String tipoSeguridad, String contrasena) {
         this.id = id;
         this.accesoPublico = accesoPublico;
         this.tipoSeguridad = tipoSeguridad;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
     }
 
-    // Getters y setters
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -39,11 +49,11 @@ public class ConfiguracionRed {
         this.tipoSeguridad = tipoSeguridad;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

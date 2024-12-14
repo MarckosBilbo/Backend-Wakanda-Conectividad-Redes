@@ -1,6 +1,6 @@
 package org.example.backendwakandaconectividadredes.repos;
 
-import org.example.backendwakandaconectividadredes.model.HistorialConexiones;
+import org.example.backendwakandaconectividadredes.domain.HistorialConexiones;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

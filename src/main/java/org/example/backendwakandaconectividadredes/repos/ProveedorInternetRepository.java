@@ -1,6 +1,6 @@
 package org.example.backendwakandaconectividadredes.repos;
 
-import org.example.backendwakandaconectividadredes.model.ProveedorInternet;
+import org.example.backendwakandaconectividadredes.domain.ProveedorInternet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

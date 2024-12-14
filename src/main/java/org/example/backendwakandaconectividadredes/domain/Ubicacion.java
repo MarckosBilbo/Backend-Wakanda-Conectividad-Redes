@@ -1,12 +1,26 @@
 package org.example.backendwakandaconectividadredes.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Ubicacion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String direccion;
     private String ciudad;
     private String coordenadas;
 
-    // Constructor
+    // Constructor vacío requerido por JPA
+    public Ubicacion() {
+    }
+
+    // Constructor completo
     public Ubicacion(Long id, String direccion, String ciudad, String coordenadas) {
         this.id = id;
         this.direccion = direccion;
@@ -14,7 +28,7 @@ public class Ubicacion {
         this.coordenadas = coordenadas;
     }
 
-    // Getters y setters
+    // Getters y Setters
     public Long getId() {
         return id;
     }

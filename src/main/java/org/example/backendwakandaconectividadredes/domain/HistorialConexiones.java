@@ -1,19 +1,35 @@
 package org.example.backendwakandaconectividadredes.domain;
 
-
+import jakarta.persistence.*;
 import org.example.backendwakandaconectividadredes.domain.usuario.Usuario;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
+@Entity
 public class HistorialConexiones {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date fechaConexion;
+
+    private LocalDateTime fechaConexion;
+
     private Long duracion;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "red_wifi_id")
     private RedWifi redWifi;
 
-    // Constructor
-    public HistorialConexiones(Long id, Date fechaConexion, Long duracion, Usuario usuario, RedWifi redWifi) {
+    // Constructor vacío requerido por JPA
+    public HistorialConexiones() {
+    }
+
+    // Constructor completo
+    public HistorialConexiones(Long id, LocalDateTime fechaConexion, Long duracion, Usuario usuario, RedWifi redWifi) {
         this.id = id;
         this.fechaConexion = fechaConexion;
         this.duracion = duracion;
@@ -21,7 +37,7 @@ public class HistorialConexiones {
         this.redWifi = redWifi;
     }
 
-    // Getters y setters
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -30,11 +46,11 @@ public class HistorialConexiones {
         this.id = id;
     }
 
-    public Date getFechaConexion() {
+    public LocalDateTime getFechaConexion() {
         return fechaConexion;
     }
 
-    public void setFechaConexion(Date fechaConexion) {
+    public void setFechaConexion(LocalDateTime fechaConexion) {
         this.fechaConexion = fechaConexion;
     }
 

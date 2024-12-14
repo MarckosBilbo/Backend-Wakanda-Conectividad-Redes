@@ -1,17 +1,37 @@
 package org.example.backendwakandaconectividadredes.domain;
 
+import jakarta.persistence.*;
+
+@Entity
 public class RedWifi {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
     private String bandaAncha;
     private boolean estadoEncendida;
     private String proveedor;
     private int numeroDeUsuarios;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ubicacion_id")
     private Ubicacion ubicacion;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "configuracion_red_id")
     private ConfiguracionRed configuracionRed;
+
+    @ManyToOne
+    @JoinColumn(name = "proveedor_internet_id")
     private ProveedorInternet proveedorInternet;
 
-    // Constructor
+    // Constructor vacío requerido por JPA
+    public RedWifi() {
+    }
+
+    // Constructor completo
     public RedWifi(Long id, String nombre, String bandaAncha, boolean estadoEncendida, String proveedor, int numeroDeUsuarios, Ubicacion ubicacion, ConfiguracionRed configuracionRed, ProveedorInternet proveedorInternet) {
         this.id = id;
         this.nombre = nombre;
@@ -24,7 +44,7 @@ public class RedWifi {
         this.proveedorInternet = proveedorInternet;
     }
 
-    // Getters y setters
+    // Getters y Setters
     public Long getId() {
         return id;
     }
