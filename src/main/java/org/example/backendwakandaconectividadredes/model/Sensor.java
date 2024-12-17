@@ -1,20 +1,27 @@
 package org.example.backendwakandaconectividadredes.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
 public class Sensor {
-    private Long id;
-    private String tipo; // Ejemplo: temperatura, humedad, calidad del aire
-    private String ubicacion;
-    private double valor;
-    private LocalDateTime fechaRegistro;
 
-    // Constructor
-    public Sensor(Long id, String tipo, String ubicacion, double valor, LocalDateTime fechaRegistro) {
-        this.id = id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String tipo;
+    private String ubicacion;
+
+    private LocalDateTime fechaRegistro; // Nuevo campo agregado
+
+    // Constructor vacío requerido por JPA
+    public Sensor() {}
+
+    // Constructor completo
+    public Sensor(String tipo, String ubicacion, LocalDateTime fechaRegistro) {
         this.tipo = tipo;
         this.ubicacion = ubicacion;
-        this.valor = valor;
         this.fechaRegistro = fechaRegistro;
     }
 
@@ -41,14 +48,6 @@ public class Sensor {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
     }
 
     public LocalDateTime getFechaRegistro() {

@@ -1,23 +1,29 @@
 package org.example.backendwakandaconectividadredes.model;
 
-
+import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class PlataformaDatos {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
     private String descripcion;
-    private List<Sensor> sensores;
 
-    // Constructor
-    public PlataformaDatos(Long id, String nombre, String descripcion, List<Sensor> sensores) {
-        this.id = id;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Sensor> sensores = new ArrayList<>();
+
+    public PlataformaDatos() {}
+
+    public PlataformaDatos(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.sensores = sensores;
     }
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }
