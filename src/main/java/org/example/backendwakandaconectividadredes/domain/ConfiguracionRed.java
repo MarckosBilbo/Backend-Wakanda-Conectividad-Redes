@@ -8,9 +8,11 @@ public class ConfiguracionRed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column
     private boolean accesoPublico;
+    @Column
     private String tipoSeguridad;
+    @Column
     private String contrasena;
 
     // Constructor vacío requerido por JPA

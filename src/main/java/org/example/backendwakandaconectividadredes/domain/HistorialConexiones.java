@@ -11,9 +11,9 @@ public class HistorialConexiones {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column
     private LocalDateTime fechaConexion;
-
+    @Column
     private Long duracion;
 
     @ManyToOne

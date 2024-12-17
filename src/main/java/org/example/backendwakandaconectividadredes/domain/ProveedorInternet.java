@@ -1,12 +1,26 @@
 package org.example.backendwakandaconectividadredes.domain;
 
+import jakarta.persistence.*;
+
+@Entity
 public class ProveedorInternet {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private String nombre;
+    @Column
     private String contacto;
+    @Column
     private String tipoDeServicio;
 
-    // Constructor
+
+    // Constructor vacío requerido por JPA
+    public ProveedorInternet() {}
+
+    // Constructor completo
     public ProveedorInternet(Long id, String nombre, String contacto, String tipoDeServicio) {
         this.id = id;
         this.nombre = nombre;

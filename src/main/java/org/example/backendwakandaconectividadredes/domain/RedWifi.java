@@ -1,6 +1,8 @@
 package org.example.backendwakandaconectividadredes.domain;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class RedWifi {
@@ -9,30 +11,39 @@ public class RedWifi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String nombre;
+    @Column
     private String bandaAncha;
+    @Column
     private boolean estadoEncendida;
+    @Column
     private String proveedor;
+    @Column
     private int numeroDeUsuarios;
-
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ubicacion_id")
+    @JoinColumn(name = "ubicacion_id", nullable = false)
     private Ubicacion ubicacion;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "configuracion_red_id")
+    @JoinColumn(name = "configuracion_red_id", nullable = false)
     private ConfiguracionRed configuracionRed;
 
     @ManyToOne
-    @JoinColumn(name = "proveedor_internet_id")
+    @JoinColumn(name = "proveedor_internet_id", nullable = false)
     private ProveedorInternet proveedorInternet;
+
+    @OneToMany(mappedBy = "redWifi", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HistorialConexiones> historialConexiones = new ArrayList<>();
 
     // Constructor vacío requerido por JPA
     public RedWifi() {
     }
 
     // Constructor completo
-    public RedWifi(Long id, String nombre, String bandaAncha, boolean estadoEncendida, String proveedor, int numeroDeUsuarios, Ubicacion ubicacion, ConfiguracionRed configuracionRed, ProveedorInternet proveedorInternet) {
+    public RedWifi(Long id, String nombre, String bandaAncha, boolean estadoEncendida,
+                   String proveedor, int numeroDeUsuarios, Ubicacion ubicacion,
+                   ConfiguracionRed configuracionRed, ProveedorInternet proveedorInternet) {
         this.id = id;
         this.nombre = nombre;
         this.bandaAncha = bandaAncha;
@@ -115,5 +126,13 @@ public class RedWifi {
 
     public void setProveedorInternet(ProveedorInternet proveedorInternet) {
         this.proveedorInternet = proveedorInternet;
+    }
+
+    public List<HistorialConexiones> getHistorialConexiones() {
+        return historialConexiones;
+    }
+
+    public void setHistorialConexiones(List<HistorialConexiones> historialConexiones) {
+        this.historialConexiones = historialConexiones;
     }
 }
