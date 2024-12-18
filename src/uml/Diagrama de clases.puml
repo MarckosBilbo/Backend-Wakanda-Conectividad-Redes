@@ -1,0 +1,64 @@
+@startuml
+class Usuario {
+            - id: Long
+            - nombre: String
+            - apellido: String
+            - email: String
+            - telefono: String
+            - credenciales: Credenciales
+            - roles: List<String>
+        }
+
+class Credenciales {
+    Long id
+    String correo
+    String password
+}
+
+class RedWifi {
+    Long id
+    String nombre
+    String ubicacion
+    String bandaAncha
+    boolean estadoEncendida
+    String proveedor
+    int numeroDeUsuarios
+}
+
+class Ubicacion {
+    Long id
+    String direccion
+    String ciudad
+    String coordenadas
+}
+
+class ProveedorInternet {
+    Long id
+    String nombre
+    String contacto
+    String tipoDeServicio
+}
+
+class HistorialConexiones {
+    Long id
+    Date fechaConexion
+    Long duracion
+    Usuario usuario
+    RedWifi redWifi
+}
+
+class ConfiguracionRed {
+    Long id
+    boolean accesoPublico
+    String tipoSeguridad
+    String contraseña
+}
+
+Usuario "1" -- "1" Credenciales : tiene
+RedWifi "1" -- "1" Ubicacion : ubicada en
+RedWifi "1" -- "1" ConfiguracionRed : configurada por
+RedWifi "1" -- "1" ProveedorInternet : administrada por
+Usuario "1" -- "1" HistorialConexiones : registra
+RedWifi "1" -- "1" HistorialConexiones : registra
+
+@enduml

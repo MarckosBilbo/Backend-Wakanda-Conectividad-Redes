@@ -1,0 +1,32 @@
+@startuml
+start
+
+:Usuario inicia sesión;
+if (Credenciales válidas?) then (Sí)
+    :Muestra menú principal;
+    if (Selecciona "Visualizar redes Wi-Fi disponibles"?) then (Sí)
+        :Consultar redes Wi-Fi activas;
+        :Mostrar lista de redes Wi-Fi disponibles;
+        if (Usuario selecciona red Wi-Fi?) then (Sí)
+            :Validar configuración de acceso a la red;
+            if (Acceso permitido?) then (Sí)
+                :Usuario se conecta a la red Wi-Fi;
+                :Registrar conexión en el historial;
+            else (No)
+                :Mostrar mensaje de error;
+            endif
+        endif
+    else if (Selecciona "Ver historial de conexiones"?) then (Sí)
+        :Consultar historial de conexiones del usuario;
+        :Mostrar historial;
+    else if (Selecciona "Gestionar configuración de red"?) then (Sí)
+        :Administrador edita configuración;
+        :Actualizar configuración en la red;
+        :Guardar cambios en la base de datos;
+    endif
+else (No)
+    :Mostrar error de autenticación;
+endif
+
+stop
+@enduml
